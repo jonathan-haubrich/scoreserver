@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  agent:
+    container_name: scoreserver-agent
+    build:
+      context: ./agent
+      dockerfile: Dockerfile
+    environment:
+      - SCORE_SERVER_IP=172.17.0.1
+      - SCORE_SERVER_PORT=8000
+      - SCORE_TOKEN=9ebd45b4-000c-4bac-8f12-10dfa2d018d4
+      - EXERCISE_ID=9b2a32ca-7134-4d22-871b-cfcac4a31ab2
+      - PYTHONUNBUFFERED=1
+
+    networks:
+      - mynetwork
+  student:
+    container_name: scoreserver-student
+    build:
+      context: ./student
+      dockerfile: Dockerfile
+      args:
+        - USERNAME=testuser
+        - PASSWORD=testpass
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
