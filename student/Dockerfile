@@ -12,8 +12,5 @@ RUN useradd -m -s /bin/bash $USERNAME
 # Set the password for the student user
 RUN echo "$USERNAME:$PASSWORD" | chpasswd
 
-# Expose SSH port
-EXPOSE 22
-
 # Start SSH server
 CMD ["/usr/sbin/sshd", "-D"]
